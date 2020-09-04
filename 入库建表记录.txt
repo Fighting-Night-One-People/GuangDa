@@ -1,0 +1,207 @@
+CREATE TABLE sm_system(
+id int(25) not null PRIMARY KEY auto_increment,
+sys_id int(25) not null,
+app_number int(25),
+app_ch_title varchar(40),
+app_en_title varchar(40),
+app_status varchar(20),
+app_group varchar(20),
+create_user varchar(20),
+create_time TIMESTAMP,
+update_user varchar(20),
+update_time TIMESTAMP  default '1970-01-01 10:00:00'
+);
+CREATE TABLE cd_set_case_type(
+id int(25) not null PRIMARY KEY auto_increment,
+title varchar(40) not null,
+description varchar(4000),
+create_user varchar(20),
+create_time TIMESTAMP,
+update_user varchar(20),
+update_time TIMESTAMP DEFAULT '1970-01-01 10:00:00'
+);
+------------------------------------------------------------------------------------------------------------
+create table da_swift_num_rule(
+`id` int(25) not null auto_increment,
+`da_swift_num_id` int(25) not null,
+ `title` varchar(40) not null,
+ `type` varchar(10) not null,
+ `length` int(10) not null,
+ `value` int(10) not null,
+ `create_value` int(10) not null,
+ `step_length` int(10) not null,
+ `generation_type` varchar(10) not null,
+ `create_user` varchar(20) DEFAULT NULL,
+ `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+ `update_user` varchar(20) DEFAULT NULL,
+ `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+);
+create table da_swift_num(
+`id` int(25) not null auto_increment,
+`system_id` int(25) not null,
+`title` varchar(40) not null,
+`swift_num_rule_title`  varchar(40) not null,
+`description` varchar(4000),
+ `create_user` varchar(20) DEFAULT NULL,
+ `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+ `update_user` varchar(20) DEFAULT NULL,
+ `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+);
+-------------------------------------------------------------------------------------------------------------
+CREATE TABLE `da_event` (  
+  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `title` varchar(40) not null,
+	`event_class_name` varchar(400) not null,
+	`type` varchar(10) not null,
+	`description` varchar(4000),
+  `create_user` varchar(20) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_user` varchar(20) DEFAULT NULL,
+  `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) 
+create table da_adapter(
+id int(25) not null PRIMARY KEY auto_increment,
+da_adapter_group_id int(25) not null,
+title varchar(40) not null,
+type varchar(40) not null,
+environment_id int(25) not null,
+is_head_before varchar(2) not  null,
+is_trace_message_head varchar(3) not null,
+channel_number varchar(4) not null,
+institution_number varchar(4) not null,
+create_user varchar(20) DEFAULT NULL,
+create_time timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+update_user varchar(20) DEFAULT NULL,
+update_time timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_adapter_parameter(
+id int(25) not null PRIMARY KEY auto_increment,
+da_adapter_id int(25) not null,
+title varchar(40) not null,
+`value` varchar(100) not null,
+create_user varchar(20) DEFAULT NULL,
+create_time timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+update_user varchar(20) DEFAULT NULL,
+update_time timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_adapter_extend_property(
+id int(25) not null PRIMARY KEY auto_increment,
+da_adapter_id int(25) not null,
+title varchar(40) not null,
+`value` varchar(40) not null,
+create_user varchar(20) DEFAULT NULL,
+create_time timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+update_user varchar(20) DEFAULT NULL,
+update_time timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_adapter_async_rule(
+id int(25) not null PRIMARY KEY auto_increment,
+da_adapter_id int(25) not null,
+response_ch_title varchar(40) not null,
+response_en_title varchar(40) not null,
+type varchar(40) not null,
+request_ch_title varchar(40) not null,
+request_en_title varchar(40) not null,
+`create_user` varchar(20) DEFAULT NULL,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`update_user` varchar(20) DEFAULT NULL,
+`update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_web_service_operation_parameters(
+id int(25) not null PRIMARY key auto_increment,
+da_adapter_id int(25) not null,
+name varchar(40) not null,
+parameter_name varchar(40) not null
+)
+create table sm_system_variable(
+id int(25) not null PRIMARY KEY auto_increment,
+system_id int(25) not null,
+title varchar(40) not null,
+default_value varchar(40) ,
+description varchar(400),
+`create_user` varchar(20) DEFAULT NULL,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`update_user` varchar(20) DEFAULT NULL,
+`update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_system_function(
+id int(25) not null PRIMARY KEY auto_increment,
+title varchar(40) not null,
+type varchar(40) not null,
+method_title varchar(100)  not null,
+input_parameter varchar(255),
+description varchar(4000),
+`create_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`update_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+`update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+ );
+ create table da_system_function_input_parameter(
+ id int(25) not null PRIMARY KEY auto_increment,
+ da_system_function_id int(25) not null,
+ title varchar(40) not null,
+ type varchar(40) not null,
+ data_source varchar(40) not null,
+ parameter_value varchar(40),
+ parameter_extend varchar(100),
+ `create_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`update_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+`update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_custom_function(
+id int(25) not null PRIMARY KEY auto_increment,
+system_id int(25) not null,
+title varchar(40) not null,
+script text not null,
+description varchar(4000),
+`create_user` varchar(20) DEFAULT NULL,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`update_user` varchar(20) DEFAULT NULL,
+`update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+create table da_SQL_statement(
+id int(25) not null PRIMARY KEY auto_increment,
+system_id int(25) not null,
+data_source_group_id int(25) not null,
+title varchar(40) not null,
+statement text not null,
+time_out int(10),
+  `create_user` varchar(20) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_user` varchar(20) DEFAULT NULL,
+  `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP
+);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+create table da_data_function_rule(
+`id` int(25) not null auto_increment,
+`da_data_function_id` int(25) not null,
+ `title` varchar(40) not null,
+ `type` varchar(10) not null,
+ `length` int(10) not null,
+ `value` int(10) not null,
+ `create_value` int(10) not null,
+ `step_length` int(10) not null,
+ `generation_type` varchar(10) ,
+ `create_user` varchar(20) DEFAULT NULL,
+ `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+ `update_user` varchar(20) DEFAULT NULL,
+ `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+);
+create table da_data_function(
+`id` int(25) not null auto_increment,
+`system_id` int(25) not null,
+`title` varchar(40) not null,
+`data_function_rule_title`  varchar(40) not null,
+`description` varchar(4000),
+ `create_user` varchar(20) DEFAULT NULL,
+ `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+ `update_user` varchar(20) DEFAULT NULL,
+ `update_time` timestamp NULL DEFAULT '1970-01-01 10:00:00' ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
