@@ -1,7 +1,29 @@
 
 1.delete 批量删除 
 	System   -- 没有删除
+	daSystemVariable --批量删除已修改
 	CaseSetType -- 已有批量删除
+	systemFunction  待议。。。。有子表
+	SQLStatement 已修改
+	Event 已修改
+	DataFunction  待议。。。。有子表
+	CustomFunction 已修改
 2.不能service调用service
+	System   不存在
+	daSystemVariable  不存在
+	CaseSetType   不存在
+	systemFunction  已修改
+	SQLStatement 不存在
+	Event 不存在
+	DataFunction 已修改
+	CustomFunction 不存在
 3.模糊查询传对象
+	System   已修改
+	daSystemVariable  模糊查询传对象已修改
+	CaseSetType 不需要模糊查询
+	systemFunction  已修改
+	SQLStatement 已修改
+	Event 已修改
+	DataFunction 已修改
+	CustomFunction 已修改
 	
