@@ -1,3 +1,7 @@
-delete 批量删除 
-	system   --
+
+1.delete 批量删除 
+	System   -- 没有删除
+	CaseSetType -- 已有批量删除
+2.不能service调用service
+3.模糊查询传对象
 	

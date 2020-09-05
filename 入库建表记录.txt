@@ -116,7 +116,7 @@ da_adapter_id int(25) not null,
 name varchar(40) not null,
 parameter_name varchar(40) not null
 )
-create table sm_system_variable(
+create table da_system_variable(
 id int(25) not null PRIMARY KEY auto_increment,
 system_id int(25) not null,
 title varchar(40) not null,
