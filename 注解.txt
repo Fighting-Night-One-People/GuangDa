@@ -1,0 +1,14 @@
+@Component
+	把普通pojo(entity)实例化到spring容器中
+	将普通JavaBean实例化到spring容器中,Spring容器统一管理，用起来不用自己new了，相当于配置文件中的<bean id="" class=""/>
+	在实现类中用到了@Autowired注解，被注解@Autowired的类是从spring容器中取出来的，那么调用的类也需要被spring管理，需要加上@Component注解
+@Controller 
+	控制器（注入服务）
+@Service
+	用于标注服务层，主要用来进行业务的逻辑处理
+@ControllerAdvice (这是springMVC提供的功能，在springBoot中可以直接使用)
+	
+	应用场景：
+		全局异常处理
+		全局数据绑定
+		全局数据预处理
