@@ -245,3 +245,31 @@ create table da_flow_node_parameters(
   `update_user` varchar(255) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间'
 )
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+CREATE TABLE `da_control` (
+  `id` varchar(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '主键(唯一标识UUID)',
+  `system_id` int(20) NOT NULL COMMENT '系统ID',
+  `title` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '控件标题',
+  `method` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '控件方法',
+  `description` varchar(4000) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '描述',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_user` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `fk_control_system_id` (`system_id`),
+  CONSTRAINT `fk_control_system_id` FOREIGN KEY (`system_id`) REFERENCES `sm_system` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+CREATE TABLE `da_control_properties` (
+  `id` varchar(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '主键(唯一标识UUID)',
+  `control_id` varchar(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '控件表ID',
+  `title` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '标题',
+  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
+  `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '类型',
+  `default_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '缺省值',
+  `description` varchar(4000) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`),
+  KEY `fk_control_id` (`control_id`),
+  CONSTRAINT `fk_control_id` FOREIGN KEY (`control_id`) REFERENCES `da_control` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
